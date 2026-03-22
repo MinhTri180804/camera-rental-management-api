@@ -1,6 +1,8 @@
 import { SendEmailVerificationOTPUseCase } from '@modules/auth/application/use-case/send-email-verification-otp.usecase';
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { SendEmailVerificationOtpDTO } from '../application/dto/email-register.dto';
+import { SingleDataResponse } from '@shared/presentation/response/data-response';
+import { ResponseMessage } from '@shared/presentation/decorator/response-message.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -9,9 +11,15 @@ export class AuthController {
   ) {}
 
   @Post('register/send-email-verification-otp')
-  async sendEmailVerificationOtp(@Body() data: SendEmailVerificationOtpDTO) {
-    return await this._sendEmailVerificationOtpUseCase.execute({
+  @ResponseMessage('Send email verification otp success')
+  @HttpCode(HttpStatus.OK)
+  async sendEmailVerificationOtp(
+    @Body() data: SendEmailVerificationOtpDTO,
+  ): Promise<SingleDataResponse<null>> {
+    await this._sendEmailVerificationOtpUseCase.execute({
       email: data.email,
     });
+
+    return new SingleDataResponse<null>(null);
   }
 }
