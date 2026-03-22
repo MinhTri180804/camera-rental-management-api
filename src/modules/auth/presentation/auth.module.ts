@@ -4,7 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { MailModule } from '@shared/infrastructure/mail/mail.module';
 import { UserSchemaModel } from '@shared/infrastructure/persistence/schema/user.schema';
 import { QueueModule } from '@shared/infrastructure/queue/queue.module';
-import { EmailVerificationUseCase } from '../application/use-case/email-verification.usecase';
+import { SendEmailVerificationOTPUseCase } from '../application/use-case/send-email-verification-otp.usecase';
 import { CACHE_OTP_EMAIL_VERIFICATION_SERVICE } from '../domain/port/cache-otp-email-verification.service';
 import { OTP_EMAIL_VERIFICATION_SERVICE_TOKEN } from '../domain/port/otp-email-verification.service';
 import { USER_REPOSITORY_TOKEN } from '../domain/port/user.repository';
@@ -32,7 +32,7 @@ import { CacheModule } from '@shared/infrastructure/cache/cache.module';
   ],
   providers: [
     MailProcessor,
-    EmailVerificationUseCase,
+    SendEmailVerificationOTPUseCase,
     {
       provide: MAIL_QUEUE_SERVICE_TOKEN,
       useClass: MailQueueServiceIml,

@@ -1,16 +1,16 @@
-import { EmailVerificationUseCase } from '@modules/auth/application/use-case/email-verification.usecase';
+import { SendEmailVerificationOTPUseCase } from '@modules/auth/application/use-case/send-email-verification-otp.usecase';
 import { Body, Controller, Post } from '@nestjs/common';
-import { EmailRegisterDTO } from '../application/dto/email-register.dto';
+import { SendEmailVerificationOtpDTO } from '../application/dto/email-register.dto';
 
 @Controller('auth')
 export class AuthController {
   constructor(
-    private readonly _emailVerificationUseCase: EmailVerificationUseCase,
+    private readonly _sendEmailVerificationOtpUseCase: SendEmailVerificationOTPUseCase,
   ) {}
 
-  @Post('register/verification-email')
-  async verificationEmail(@Body() data: EmailRegisterDTO) {
-    return await this._emailVerificationUseCase.execute({
+  @Post('register/send-email-verification-otp')
+  async sendEmailVerificationOtp(@Body() data: SendEmailVerificationOtpDTO) {
+    return await this._sendEmailVerificationOtpUseCase.execute({
       email: data.email,
     });
   }

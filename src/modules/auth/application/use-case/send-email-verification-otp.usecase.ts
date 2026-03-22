@@ -13,10 +13,10 @@ import {
 } from '@modules/auth/domain/port/user.repository';
 import { MAIL_QUEUE_SERVICE_TOKEN } from '@modules/auth/infrastructure/queue/mail-queue.service.iml';
 import { Inject, Injectable } from '@nestjs/common';
-import { EmailRegisterDTO } from '../dto/email-register.dto';
+import { SendEmailVerificationOtpDTO } from '../dto/email-register.dto';
 
 @Injectable()
-export class EmailVerificationUseCase {
+export class SendEmailVerificationOTPUseCase {
   constructor(
     @Inject(USER_REPOSITORY_TOKEN)
     private readonly _userRepository: IUserRepository,
@@ -31,15 +31,15 @@ export class EmailVerificationUseCase {
     private readonly _cacheOtpEmailVerificationService: ICacheOtpEmailVerificationService,
   ) {}
 
-  async execute(emailRegisterDTO: EmailRegisterDTO) {
+  async execute(sendEmailVerificationOtpDTO: SendEmailVerificationOtpDTO) {
     const emailIsExist = await this._userRepository.findByEmail(
-      emailRegisterDTO.email,
+      sendEmailVerificationOtpDTO.email,
     );
 
     if (emailIsExist) return;
 
     const isExistCache = await this._cacheOtpEmailVerificationService.isExist(
-      emailRegisterDTO.email,
+      sendEmailVerificationOtpDTO.email,
     );
 
     // TODO: implement response too many requests
@@ -49,12 +49,12 @@ export class EmailVerificationUseCase {
     const otpHashed = this._otpEmailVerificationService.hash(otp);
 
     await this._cacheOtpEmailVerificationService.set(
-      emailRegisterDTO.email,
+      sendEmailVerificationOtpDTO.email,
       otpHashed,
     );
 
     await this._mailQueueService.sendOTPEmailVerification(
-      emailRegisterDTO.email,
+      sendEmailVerificationOtpDTO.email,
       otp,
       Date.now() +
         this._cacheOtpEmailVerificationService.expiresTimeSeconds * 1000,
