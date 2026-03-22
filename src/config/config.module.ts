@@ -1,0 +1,28 @@
+import { ConfigModule as NestConfigModule } from '@nestjs/config';
+import { Module } from '@nestjs/common';
+import { getEnvFilePath } from '@common/utils/get-env-file-path.util';
+import appConfig from './app/app.config';
+import mongodbConfig from './mongodb/mongodb.config';
+import redisConfig from './redis/redis.config';
+import nodemailerConfig from './nodemailer/nodemailer.config';
+import mailConfig from './mail/mail.config';
+
+@Module({
+  imports: [
+    NestConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: getEnvFilePath(),
+      cache: true,
+      load: [
+        appConfig,
+        mongodbConfig,
+        redisConfig,
+        nodemailerConfig,
+        mailConfig,
+      ],
+    }),
+  ],
+  providers: [],
+  exports: [],
+})
+export class ConfigModule {}
