@@ -13,7 +13,7 @@ import {
 } from '@modules/auth/domain/port/user.repository';
 import { MAIL_QUEUE_SERVICE_TOKEN } from '@modules/auth/infrastructure/queue/mail-queue.service.iml';
 import { Inject, Injectable } from '@nestjs/common';
-import { SendEmailVerificationOtpDTO } from '../dto/email-register.dto';
+import { SendEmailVerificationOtpDTO } from '../dto/send-email-verification-otp.dto';
 
 @Injectable()
 export class SendEmailVerificationOTPUseCase {
