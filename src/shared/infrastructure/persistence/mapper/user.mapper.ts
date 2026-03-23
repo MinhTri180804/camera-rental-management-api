@@ -4,7 +4,7 @@ import { UserDocument } from '../schema/user.schema';
 export class UserMapper {
   static toDomain(user: UserDocument): User {
     const entity = new User();
-    entity.id = user._id;
+    entity.id = user._id.toString();
     entity.email = user.email;
     entity.password = user.password;
     entity.twoFactorEnabled = user.two_factor_enabled;

@@ -1,6 +1,6 @@
 import { SendEmailVerificationOTPUseCase } from '@modules/auth/application/use-case/send-email-verification-otp.usecase';
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
-import { SendEmailVerificationOtpDTO } from '../application/dto/email-register.dto';
+import { SendEmailVerificationOtpDTO } from '../application/dto/send-email-verification-otp.dto';
 import { SingleDataResponse } from '@shared/presentation/response/data-response';
 import { ResponseMessage } from '@shared/presentation/decorator/response-message.decorator';
 

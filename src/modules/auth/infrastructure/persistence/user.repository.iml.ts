@@ -22,7 +22,9 @@ export class UserRepositoryImpl implements IUserRepository {
     return UserMapper.toDomain(user);
   }
 
-  async create(user: User): Promise<User> {
+  async create(
+    user: Pick<User, 'email' | 'password' | 'twoFactorEnabled'>,
+  ): Promise<User> {
     const userDocument = UserMapper.toPersistence(user);
     const createdUser = await this._userModel.create(userDocument);
     return UserMapper.toDomain(createdUser);

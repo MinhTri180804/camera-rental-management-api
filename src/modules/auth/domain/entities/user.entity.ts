@@ -1,7 +1,5 @@
-import { Types } from 'mongoose';
-
 export class User {
-  id: Types.ObjectId;
+  id: string;
   email: string;
   password: string;
   twoFactorEnabled: boolean;
