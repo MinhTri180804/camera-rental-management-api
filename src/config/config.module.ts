@@ -6,6 +6,8 @@ import mongodbConfig from './mongodb/mongodb.config';
 import redisConfig from './redis/redis.config';
 import nodemailerConfig from './nodemailer/nodemailer.config';
 import mailConfig from './mail/mail.config';
+import accessTokenConfig from './access-token/access-token.config';
+import refreshTokenConfig from './refresh-token/refresh-token.config';
 
 @Module({
   imports: [
@@ -19,6 +21,8 @@ import mailConfig from './mail/mail.config';
         redisConfig,
         nodemailerConfig,
         mailConfig,
+        accessTokenConfig,
+        refreshTokenConfig,
       ],
     }),
   ],
