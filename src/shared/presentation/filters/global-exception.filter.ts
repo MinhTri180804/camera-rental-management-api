@@ -1,14 +1,13 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import {
   ArgumentsHost,
   Catch,
   ExceptionFilter,
-  HttpException,
   HttpStatus,
 } from '@nestjs/common';
 import { Response } from 'express';
 import { DomainException } from '../exceptions/domain.exception';
+import { ValidationRequestException } from '../exceptions/validation.exception';
 import { ApiError } from '../response/api-error';
 
 @Catch()
@@ -24,6 +23,8 @@ export class GlobalExceptionFilter implements ExceptionFilter {
   catch(exception: any, host: ArgumentsHost): void {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
+
+    console.log('[ROOT EXCEPTION]: ', exception);
 
     /**
      * Handle the DomainException case.
@@ -53,39 +54,21 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       return;
     }
 
-    /**
-     * Handle the HttpException case.
-     *
-     * This case is triggered when an instance of HttpException is thrown.
-     * It constructs an ApiError object with the error code and message from the exception.
-     * If the exception has details, it is included in the ApiError object.
-     * The ApiError object is then sent as a JSON response with the status code from the exception.
-     *
-     * @param {HttpException} exception - The instance of HttpException that was thrown.
-     * @return {void} This function does not return anything.
-     */
-    if (exception instanceof HttpException) {
+    if (exception instanceof ValidationRequestException) {
       const status = exception.getStatus();
       //   TODO: Refactor here
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const exceptionResponse = exception.getResponse() as any;
       //   TODO: Refactor here
 
-      const isValidation =
-        status === 400 && Array.isArray(exceptionResponse?.message);
+      console.log('[EXCEPTION]: ', exceptionResponse.details);
 
       const responseBody: ApiError = {
         success: false,
         error: {
           code: 'VALIDATION_ERROR',
           message: 'Validation failed',
-          //   TODO: Refactor here
-
-          details: isValidation
-            ? exceptionResponse?.message.map((msg: string) =>
-                this._parseValidationMsg(msg),
-              )
-            : undefined,
+          details: exceptionResponse.details,
         },
       };
 
