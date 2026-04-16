@@ -1,0 +1,2 @@
+export const DUMP_PASSWORD_HASHED =
+  '$2b$10$C6UzMDM.H6dfI/f/IKcEeO9qQhY/4F0x1Yh9K1c5jHcG1GJx8zR7K';
