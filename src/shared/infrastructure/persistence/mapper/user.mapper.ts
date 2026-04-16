@@ -1,4 +1,4 @@
-import { User } from '@modules/auth/domain/entities/user.entity';
+import { User } from '@modules/auth/shared/domain/entities/user.entity';
 import { UserDocument } from '../schema/user.schema';
 
 export class UserMapper {

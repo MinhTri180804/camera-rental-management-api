@@ -16,10 +16,17 @@ export class BullMQFactory implements SharedBullConfigurationFactory {
     const { host, port } =
       this._configService.getOrThrow<RedisConfig>(RedisConfigName);
 
+    const isTestMode = process.env.NODE_ENV === 'test';
+
     return {
       connection: {
         host,
         port,
+      },
+      // Disable workers in test mode by not creating default worker
+      defaultJobOptions: {
+        removeOnComplete: isTestMode ? 1 : 10,
+        removeOnFail: isTestMode ? 1 : 10,
       },
     };
   }
