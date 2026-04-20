@@ -1,0 +1,33 @@
+version: '3.8'
+
+name: clean-architecture-test-environment
+
+services:
+  mongodb:
+    container_name: mongodb-test-container
+    image: mongo:7
+    restart: unless-stopped
+    ports:
+      - '27018:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    tmpfs:
+      - /data/db
+    networks:
+      - backend-test
+
+  redis:
+    container_name: redis-test-container
+    image: redis:7
+    restart: unless-stopped
+    ports:
+      - '6380:6379'
+    tmpfs:
+      - /data
+    networks:
+      - backend-test
+
+networks:
+  backend-test:
+    driver: bridge
