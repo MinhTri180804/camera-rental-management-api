@@ -2,11 +2,11 @@ import { User } from '@modules/auth/shared/domain/entities/user.entity';
 import { IUserRepository } from '@modules/auth/shared/domain/port/user.repository';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { UserMapper } from '@shared/infrastructure/persistence/mapper/user.mapper';
+import { UserMapper } from '@modules/auth/shared/infrastructure/persistence';
 import {
   UserDocument,
   UserSchemaClass,
-} from '@shared/infrastructure/persistence/schema/user.schema';
+} from '@shared/infrastructure/persistence';
 import { Model } from 'mongoose';
 
 @Injectable()

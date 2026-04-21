@@ -1,5 +1,5 @@
-import { User } from '@modules/auth/shared/domain/entities/user.entity';
-import { UserDocument } from '../schema/user.schema';
+import { User } from '@modules/auth/shared/domain/entities';
+import { UserDocument } from '@shared/infrastructure/persistence';
 
 export class UserMapper {
   static toDomain(user: UserDocument): User {
