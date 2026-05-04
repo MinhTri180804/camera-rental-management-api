@@ -5,3 +5,11 @@ export {
   UserSchemaClass,
   UserSchemaModel,
 } from './user.schema';
+
+export {
+  PROFILE_COLLECTION_NAME,
+  type ProfileDocument,
+  ProfileSchema,
+  ProfileSchemaClass,
+  ProfileSchemaModel,
+} from './profile.schema';
