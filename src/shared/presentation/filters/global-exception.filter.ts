@@ -6,7 +6,6 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { DomainException } from '../exceptions/domain.exception';
 import { ValidationRequestException } from '../exceptions/validation.exception';
 import { ApiError } from '../response/api-error';
 
@@ -25,34 +24,6 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     const response = ctx.getResponse<Response>();
 
     console.log('[ROOT EXCEPTION]: ', exception);
-
-    /**
-     * Handle the DomainException case.
-     *
-     * This case is triggered when an instance of DomainException is thrown.
-     * It constructs an ApiError object with the error code and message from the exception.
-     * If the exception has details, it is included in the ApiError object.
-     * The ApiError object is then sent as a JSON response with the status code from the exception.
-     *
-     * @param {DomainException} exception - The instance of DomainException that was thrown.
-     * @return {void} This function does not return anything.
-     */
-    if (exception instanceof DomainException) {
-      const responseBody: ApiError = {
-        success: false,
-        error: {
-          code: exception.code,
-          message: exception.message,
-        },
-      };
-
-      if (exception.details) {
-        responseBody.error.details = exception.details;
-      }
-
-      response.status(exception.statusCode).json(responseBody);
-      return;
-    }
 
     if (exception instanceof ValidationRequestException) {
       const status = exception.getStatus();
