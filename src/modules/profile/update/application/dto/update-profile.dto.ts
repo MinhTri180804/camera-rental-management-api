@@ -4,16 +4,12 @@ import {
 } from '@modules/profile/shared/presentation';
 import { IsOptional } from 'class-validator';
 
-export class CreateProfileDTO {
+export class UpdateProfileDTO {
   @IsFirstNamePattern()
-  firstName: string;
+  @IsOptional()
+  firstName?: string;
 
   @IsLastNamePattern()
-  lastName: string;
-
   @IsOptional()
-  avatarUrl?: string;
-
-  @IsOptional()
-  avatarPublicId?: string;
+  lastName?: string;
 }

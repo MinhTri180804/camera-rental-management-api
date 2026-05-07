@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import {
   RefreshTokenConfig,
   refreshTokenConfigName,
@@ -20,7 +22,7 @@ export class JwtRefreshTokenFactory implements JwtOptionsFactory {
     return {
       secret,
       signOptions: {
-        expiresIn: expiresIn * 1000,
+        expiresIn: `${expiresIn}s`,
         jwtid: uuidv4(),
         algorithm: 'HS256',
       },

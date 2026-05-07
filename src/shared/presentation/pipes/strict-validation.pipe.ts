@@ -1,10 +1,7 @@
-import {
-  ArgumentMetadata,
-  BadRequestException,
-  ValidationPipe,
-} from '@nestjs/common';
+import { ArgumentMetadata, ValidationPipe } from '@nestjs/common';
 import { ValidationRequestException } from '../exceptions/validation.exception';
 import { cleanObject } from '@common/utils/clean-object.util';
+import { RequestBodyEmptyException } from '../exceptions';
 
 export class StrictValidationPipe extends ValidationPipe {
   constructor() {
@@ -36,7 +33,7 @@ export class StrictValidationPipe extends ValidationPipe {
     const transformClean = cleanObject({ object: transformed });
 
     if (Object.keys(transformClean).length === 0) {
-      throw new BadRequestException('Request body cannot be empty');
+      throw new RequestBodyEmptyException('Request body cannot be empty');
     }
 
     return transformed;

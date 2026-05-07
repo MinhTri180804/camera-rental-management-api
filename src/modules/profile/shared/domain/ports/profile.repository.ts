@@ -10,9 +10,15 @@ export interface IProfileRepository {
     >,
   ) => Promise<Profile>;
 
-  update: (
-    profile: Pick<Profile, 'firstName' | 'lastName' | 'id'>,
-  ) => Promise<Profile | null>;
+  update: ({
+    userId,
+    firstName,
+    lastName,
+  }: {
+    userId: string;
+    lastName?: string;
+    firstName?: string;
+  }) => Promise<Profile | null>;
 
   updateAvatar: (
     avatar: Pick<Profile, 'avatarPublicId' | 'avatarUrl' | 'id'>,

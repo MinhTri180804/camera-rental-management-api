@@ -30,13 +30,21 @@ export class ProfileRepositoryIml implements IProfileRepository {
     return ProfileMapper.toDomain(createdProfile);
   }
 
-  async update(
-    profile: Pick<Profile, 'firstName' | 'lastName' | 'id'>,
-  ): Promise<Profile | null> {
-    const profileDoc = await this._profileModel.findById(profile.id);
+  async update({
+    userId,
+    firstName,
+    lastName,
+  }: {
+    userId: string;
+    firstName?: string;
+    lastName?: string;
+  }): Promise<Profile | null> {
+    const profileDoc = await this._profileModel.findOne({
+      user_id: new Types.ObjectId(userId),
+    });
     if (!profileDoc) return null;
-    profileDoc.first_name = profile.firstName;
-    profileDoc.last_name = profile.lastName;
+    if (firstName) profileDoc.first_name = firstName;
+    if (lastName) profileDoc.last_name = lastName;
     await profileDoc.save();
     return ProfileMapper.toDomain(profileDoc);
   }
