@@ -14,7 +14,9 @@ export class ProfileRepositoryIml implements IProfileRepository {
   ) {}
 
   async findByUserId(userId: string): Promise<Profile | null> {
-    const profile = await this._profileModel.findOne({ user_id: userId });
+    const profile = await this._profileModel.findOne({
+      user_id: new Types.ObjectId(userId),
+    });
     if (!profile) return null;
     return ProfileMapper.toDomain(profile);
   }
