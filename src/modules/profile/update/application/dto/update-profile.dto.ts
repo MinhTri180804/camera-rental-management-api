@@ -1,7 +1,7 @@
 import {
   IsFirstNamePattern,
   IsLastNamePattern,
-} from '@modules/profile/shared/presentation';
+} from '@modules/profile/shared/presentation/decorator';
 import { IsOptional } from 'class-validator';
 
 export class UpdateProfileDTO {

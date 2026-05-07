@@ -3,7 +3,7 @@ import {
   PROFILE_REPOSITORY_TOKEN,
 } from '@modules/profile/shared/domain/ports';
 import { Inject, Injectable } from '@nestjs/common';
-import { ProfileNotFoundException } from '../../presentation/exceptions';
+import { ProfileNotFoundException } from '../../../shared/presentation/exceptions';
 import { UpdateProfileDTO } from '../dto';
 
 type ExecuteParams = { userId: string } & UpdateProfileDTO;
