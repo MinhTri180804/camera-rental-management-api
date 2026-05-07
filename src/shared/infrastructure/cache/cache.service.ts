@@ -21,7 +21,7 @@ import { ICacheService } from '@shared/domain/ports/cache.service';
  * - Provides type-safe operations through generic constraints
  */
 @Injectable()
-export class CacheService implements ICacheService {
+export class CacheServiceIml implements ICacheService {
   /**
    * Creates an instance of CacheService
    *

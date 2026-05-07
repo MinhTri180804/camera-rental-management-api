@@ -3,11 +3,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@config/config.module';
 import { DatabaseModule } from '@shared/infrastructure/database/database.module';
-import { CacheModule } from '@shared/infrastructure/cache/cache.module';
-import { AuthModule } from '@modules/auth/presentation/auth.module';
+import { AuthModule } from '@modules/auth/auth.module';
+import { ProfileModule } from '@modules/profile/profile.module';
 
 @Module({
-  imports: [ConfigModule, DatabaseModule, CacheModule, AuthModule],
+  imports: [ConfigModule, DatabaseModule, AuthModule, ProfileModule],
   controllers: [AppController],
   providers: [AppService],
 })

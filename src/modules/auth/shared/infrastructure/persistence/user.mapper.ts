@@ -1,15 +1,15 @@
-import { User } from '@modules/auth/domain/entities/user.entity';
-import { UserDocument } from '../schema/user.schema';
+import { User } from '@modules/auth/shared/domain/entities';
+import { UserDocument } from '@shared/infrastructure/persistence';
 
 export class UserMapper {
   static toDomain(user: UserDocument): User {
     const entity = new User();
-    entity.id = user._id;
+    entity.id = user._id.toString();
     entity.email = user.email;
     entity.password = user.password;
     entity.twoFactorEnabled = user.two_factor_enabled;
-    entity.createdAt = user.createdAt;
-    entity.updatedAt = user.updatedAt;
+    entity.createdAt = user.created_at;
+    entity.updatedAt = user.updated_at;
     return entity;
   }
 

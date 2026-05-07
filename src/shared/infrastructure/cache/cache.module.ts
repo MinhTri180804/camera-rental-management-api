@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { CacheModule as CacheModuleNestjs } from '@nestjs/cache-manager';
 import { CacheRedisFactory } from './redis/redis.factory';
 import { CACHE_SERVICE_TOKEN } from '@shared/domain/ports/cache.service';
-import { CacheService } from './cache.service';
+import { CacheServiceIml } from './cache.service';
 
 @Module({
   imports: [
@@ -13,7 +13,7 @@ import { CacheService } from './cache.service';
   providers: [
     {
       provide: CACHE_SERVICE_TOKEN,
-      useClass: CacheService,
+      useClass: CacheServiceIml,
     },
   ],
   exports: [CACHE_SERVICE_TOKEN],

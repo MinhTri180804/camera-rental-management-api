@@ -1,5 +1,7 @@
 version: '3.8'
 
+name: clean-architecture-dev-environment
+
 services:
   mongodb:
     container_name: mongodb-service-container

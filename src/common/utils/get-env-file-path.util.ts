@@ -6,7 +6,7 @@ export const getEnvFilePath = () => {
       return '.env.dev';
 
     case NODE_ENV_ENUM.TEST:
-      return '.env.testing';
+      return '.env.test';
 
     case NODE_ENV_ENUM.PRODUCTION:
       return '.env.prod';

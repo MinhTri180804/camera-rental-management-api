@@ -10,12 +10,18 @@ import {
 } from '@shared/presentation/response/data-response';
 import { map, Observable } from 'rxjs';
 import { ApiResponse } from '../response/api-response';
+import { Reflector } from '@nestjs/core';
+import { RESPONSE_MESSAGE_METADATA } from '../decorator/response-message.decorator';
 
 @Injectable()
 export class ResponseInterceptor<T> implements NestInterceptor<
   T,
   ApiResponse<T>
 > {
+  private readonly _DEFAULT_MESSAGE: string = 'Default message success';
+
+  constructor(private readonly _reflector: Reflector) {}
+
   intercept(
     context: ExecutionContext,
     next: CallHandler<T>,
@@ -31,9 +37,15 @@ export class ResponseInterceptor<T> implements NestInterceptor<
          * @return {ApiResponse<T[]>} The ApiResponse instance with success set to true and the listData property of the ListDataResponse,
          *                            along with the pagination object containing the page, limit, and total properties.
          */
+        const message = this._reflector.get<string>(
+          RESPONSE_MESSAGE_METADATA,
+          context.getHandler() || this._DEFAULT_MESSAGE,
+        );
+
         if (data instanceof ListDataResponse) {
           return {
             success: true,
+            message,
             data: data.listData,
             pagination: {
               page: data.page,
@@ -53,6 +65,7 @@ export class ResponseInterceptor<T> implements NestInterceptor<
         if (data instanceof SingleDataResponse) {
           return {
             success: true,
+            message,
             data: data.data as T,
           };
         }
@@ -67,6 +80,7 @@ export class ResponseInterceptor<T> implements NestInterceptor<
          */
         return {
           success: true,
+          message,
           data: data,
         };
       }),
