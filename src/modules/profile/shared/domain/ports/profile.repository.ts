@@ -4,10 +4,7 @@ export interface IProfileRepository {
   findByUserId: (userId: string) => Promise<Profile | null>;
 
   create: (
-    profile: Pick<
-      Profile,
-      'firstName' | 'lastName' | 'avatarPublicId' | 'avatarUrl' | 'userId'
-    >,
+    profile: Pick<Profile, 'firstName' | 'lastName' | 'avatar' | 'userId'>,
   ) => Promise<Profile>;
 
   update: ({
@@ -21,7 +18,7 @@ export interface IProfileRepository {
   }) => Promise<Profile | null>;
 
   updateAvatar: (
-    avatar: Pick<Profile, 'avatarPublicId' | 'avatarUrl' | 'id'>,
+    avatar: Pick<Profile, 'avatar' | 'id'>,
   ) => Promise<Profile | null>;
 
   profileByUserIdIsExist: (userId: string) => Promise<boolean>;

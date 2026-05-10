@@ -3,8 +3,10 @@ export class Profile {
   userId: string;
   firstName: string;
   lastName: string;
-  avatarUrl: string | null;
-  avatarPublicId: string | null;
+  avatar: {
+    public_id: string;
+    version: number;
+  } | null;
   createdAt: Date;
   updatedAt: Date;
 }

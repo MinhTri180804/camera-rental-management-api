@@ -43,18 +43,17 @@ export class ProfileSchemaClass {
   user_id: Types.ObjectId;
 
   @Prop({
-    type: String,
+    type: {
+      public_id: String,
+      version: Number,
+    },
     required: false,
     default: null,
   })
-  avatar_url: string | null;
-
-  @Prop({
-    type: String,
-    required: false,
-    default: null,
-  })
-  avatar_public_id: string | null;
+  avatar: {
+    public_id: string;
+    version: number;
+  } | null;
 }
 
 export const ProfileSchema = SchemaFactory.createForClass(ProfileSchemaClass);

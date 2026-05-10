@@ -12,8 +12,8 @@ export class CreateProfileDTO {
   lastName: string;
 
   @IsOptional()
-  avatarUrl?: string;
-
-  @IsOptional()
-  avatarPublicId?: string;
+  avatar?: {
+    public_id: string;
+    version: number;
+  };
 }

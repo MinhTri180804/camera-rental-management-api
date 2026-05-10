@@ -22,10 +22,7 @@ export class ProfileRepositoryIml implements IProfileRepository {
   }
 
   async create(
-    profile: Pick<
-      Profile,
-      'firstName' | 'lastName' | 'avatarPublicId' | 'avatarUrl' | 'userId'
-    >,
+    profile: Pick<Profile, 'firstName' | 'lastName' | 'avatar' | 'userId'>,
   ): Promise<Profile> {
     const profileDoc = ProfileMapper.toPersistence(profile);
     const createdProfile = await this._profileModel.create(profileDoc);
@@ -52,12 +49,11 @@ export class ProfileRepositoryIml implements IProfileRepository {
   }
 
   async updateAvatar(
-    avatar: Pick<Profile, 'avatarPublicId' | 'avatarUrl' | 'id'>,
+    data: Pick<Profile, 'avatar' | 'id'>,
   ): Promise<Profile | null> {
-    const profileDoc = await this._profileModel.findById(avatar.id);
+    const profileDoc = await this._profileModel.findById(data.id);
     if (!profileDoc) return null;
-    profileDoc.avatar_public_id = avatar.avatarPublicId;
-    profileDoc.avatar_url = avatar.avatarUrl;
+    profileDoc.avatar = data.avatar;
     await profileDoc.save();
     return ProfileMapper.toDomain(profileDoc);
   }

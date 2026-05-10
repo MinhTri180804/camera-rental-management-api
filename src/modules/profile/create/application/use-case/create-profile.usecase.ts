@@ -24,8 +24,7 @@ export class CreateProfileUseCase {
     }
 
     const profile = await this._profileRepository.create({
-      avatarPublicId: data.avatarPublicId || null,
-      avatarUrl: data.avatarUrl || null,
+      avatar: data.avatar || null,
       firstName: data.firstName,
       lastName: data.lastName,
       userId: data.userId,
