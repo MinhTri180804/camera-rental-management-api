@@ -83,4 +83,14 @@ export class ProfileRepositoryIml implements IProfileRepository {
     await profileDoc.save();
     return ProfileMapper.toDomain(profileDoc);
   }
+
+  async deleteAvatarByUserId(userId: string): Promise<Profile | null> {
+    const profileDoc = await this._profileModel.findOne({
+      user_id: new Types.ObjectId(userId),
+    });
+    if (!profileDoc) return null;
+    profileDoc.avatar = null;
+    await profileDoc.save();
+    return ProfileMapper.toDomain(profileDoc);
+  }
 }

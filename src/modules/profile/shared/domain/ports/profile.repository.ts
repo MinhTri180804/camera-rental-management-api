@@ -30,6 +30,8 @@ export interface IProfileRepository {
   }) => Promise<Profile | null>;
 
   profileByUserIdIsExist: (userId: string) => Promise<boolean>;
+
+  deleteAvatarByUserId: (userId: string) => Promise<Profile | null>;
 }
 
 export const PROFILE_REPOSITORY_TOKEN = Symbol('PROFILE_REPOSITORY_TOKEN');

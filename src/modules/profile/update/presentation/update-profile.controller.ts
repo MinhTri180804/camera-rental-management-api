@@ -1,4 +1,11 @@
-import { Body, Controller, HttpCode, Patch, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  HttpCode,
+  Patch,
+  UseGuards,
+} from '@nestjs/common';
 import { JwtAccessTokenGuard } from '@shared/infrastructure';
 import { ResponseMessage, SingleDataResponse } from '@shared/presentation';
 import { UpdateAvatarDTO, UpdateProfileDTO } from '../application/dto';
@@ -7,12 +14,14 @@ import {
   UpdateAvatarUseCase,
   UpdateProfileUseCase,
 } from '../application/use-case';
+import { DeleteAvatarUseCase } from '../application/use-case/delete-avatar.usecase';
 
 @Controller('profile')
 export class UpdateProfileController {
   constructor(
     private readonly _updateProfileUseCase: UpdateProfileUseCase,
     private readonly _updateAvatarUseCase: UpdateAvatarUseCase,
+    private readonly _deleteAvatarUseCase: DeleteAvatarUseCase,
   ) {}
 
   @Patch('')
@@ -43,6 +52,16 @@ export class UpdateProfileController {
       userId,
       ...dto,
     });
+
+    return new SingleDataResponse(profile);
+  }
+
+  @Delete('me/avatar')
+  @HttpCode(200)
+  @ResponseMessage('Delete avatar successfully')
+  @UseGuards(JwtAccessTokenGuard)
+  async deleteAvatar(@CurrentAccessTokenPayload('sub') userId: string) {
+    const profile = await this._deleteAvatarUseCase.execute({ userId });
 
     return new SingleDataResponse(profile);
   }

@@ -10,6 +10,7 @@ import { ProfileRepositoryIml } from '../shared/infrastructure';
 import {
   UpdateAvatarUseCase,
   UpdateProfileUseCase,
+  DeleteAvatarUseCase,
 } from './application/use-case';
 
 @Module({
@@ -22,6 +23,7 @@ import {
     { provide: PROFILE_REPOSITORY_TOKEN, useClass: ProfileRepositoryIml },
     UpdateProfileUseCase,
     UpdateAvatarUseCase,
+    DeleteAvatarUseCase,
   ],
   exports: [],
 })
