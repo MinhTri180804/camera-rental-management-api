@@ -7,7 +7,10 @@ import {
 } from '@shared/infrastructure';
 import { PROFILE_REPOSITORY_TOKEN } from '../shared/domain/ports';
 import { ProfileRepositoryIml } from '../shared/infrastructure';
-import { UpdateProfileUseCase } from './application/use-case';
+import {
+  UpdateAvatarUseCase,
+  UpdateProfileUseCase,
+} from './application/use-case';
 
 @Module({
   controllers: [UpdateProfileController],
@@ -18,6 +21,7 @@ import { UpdateProfileUseCase } from './application/use-case';
   providers: [
     { provide: PROFILE_REPOSITORY_TOKEN, useClass: ProfileRepositoryIml },
     UpdateProfileUseCase,
+    UpdateAvatarUseCase,
   ],
   exports: [],
 })

@@ -21,6 +21,14 @@ export interface IProfileRepository {
     avatar: Pick<Profile, 'avatar' | 'id'>,
   ) => Promise<Profile | null>;
 
+  updateAvatarByUserId: ({
+    userId,
+    avatar,
+  }: {
+    userId: string;
+    avatar: { publicId: string; version: number };
+  }) => Promise<Profile | null>;
+
   profileByUserIdIsExist: (userId: string) => Promise<boolean>;
 }
 

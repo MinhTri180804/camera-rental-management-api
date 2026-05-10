@@ -64,4 +64,23 @@ export class ProfileRepositoryIml implements IProfileRepository {
     });
     return !!profile;
   }
+
+  async updateAvatarByUserId({
+    userId,
+    avatar,
+  }: {
+    userId: string;
+    avatar: { publicId: string; version: number };
+  }): Promise<Profile | null> {
+    const profileDoc = await this._profileModel.findOne({
+      user_id: new Types.ObjectId(userId),
+    });
+    if (!profileDoc) return null;
+    profileDoc.avatar = {
+      public_id: avatar.publicId,
+      version: avatar.version,
+    };
+    await profileDoc.save();
+    return ProfileMapper.toDomain(profileDoc);
+  }
 }
