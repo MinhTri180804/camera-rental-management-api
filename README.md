@@ -122,7 +122,6 @@ src/
 │ └── use-cases/
 │ └── register.use-case.ts ← inject IMailQueueService
 
-
 - auth
   - domain
     - entities
@@ -157,3 +156,5 @@ src/
     - guards
       - jwt.guard.ts
     - auth.module.ts
+
+src/ ├── shared/ ← dùng chung toàn app │ ├── domain/ │ ├── infrastructure/ │ └── presentation/ │ ├── modules/ ← feature modules │ ├── auth/ │ ├── post/ │ ├── comment/ │ └── profile/ │ ├── config/ ← env configuration │ ├── app.config.ts │ ├── mongo.config.ts │ ├── redis.config.ts │ └── mail.config.ts │ ├── app.module.ts ← root module └── main.ts ← bootstrap

@@ -8,6 +8,7 @@ import nodemailerConfig from './nodemailer/nodemailer.config';
 import mailConfig from './mail/mail.config';
 import accessTokenConfig from './access-token/access-token.config';
 import refreshTokenConfig from './refresh-token/refresh-token.config';
+import cloudinaryConfig from './cloudinary/cloudinary.config';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import refreshTokenConfig from './refresh-token/refresh-token.config';
         mailConfig,
         accessTokenConfig,
         refreshTokenConfig,
+        cloudinaryConfig,
       ],
     }),
   ],

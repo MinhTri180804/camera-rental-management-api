@@ -1,3 +1,12 @@
 {
-  "cSpell.words": ["bullmq", "INITDB", "Libe", "NODEMAILER", "rediscommander"]
+  "cSpell.words": [
+    "bullmq",
+    "INITDB",
+    "jwtid",
+    "Libe",
+    "NODEMAILER",
+    "rediscommander",
+    "usecase",
+    "uuidv"
+  ]
 }

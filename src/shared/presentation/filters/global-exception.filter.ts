@@ -1,12 +1,12 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import {
   ArgumentsHost,
   Catch,
   ExceptionFilter,
   HttpStatus,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { ValidationRequestException } from '../exceptions/validation.exception';
+import { RequestBodyEmptyException } from '../exceptions';
 import { ApiError } from '../response/api-error';
 
 @Catch()
@@ -23,23 +23,31 @@ export class GlobalExceptionFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
 
-    console.log('[ROOT EXCEPTION]: ', exception);
-
-    if (exception instanceof ValidationRequestException) {
+    if (exception instanceof UnauthorizedException) {
       const status = exception.getStatus();
-      //   TODO: Refactor here
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      const exceptionResponse = exception.getResponse() as any;
-      //   TODO: Refactor here
-
-      console.log('[EXCEPTION]: ', exceptionResponse.details);
 
       const responseBody: ApiError = {
         success: false,
         error: {
-          code: 'VALIDATION_ERROR',
-          message: 'Validation failed',
-          details: exceptionResponse.details,
+          code: 'UN_AUTHORIZATION',
+          message: exception.message,
+          details: null,
+        },
+      };
+
+      response.status(status).json(responseBody);
+      return;
+    }
+
+    if (exception instanceof RequestBodyEmptyException) {
+      const status = exception.getStatus();
+
+      const responseBody: ApiError = {
+        success: false,
+        error: {
+          code: RequestBodyEmptyException.ERROR_CODE,
+          message: exception.message,
+          details: null,
         },
       };
 

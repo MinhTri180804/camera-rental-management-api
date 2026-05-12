@@ -20,7 +20,7 @@ export class JwtAccessTokenFactory implements JwtOptionsFactory {
     return {
       secret,
       signOptions: {
-        expiresIn: expiresIn * 1000,
+        expiresIn: `${expiresIn}s`,
         jwtid: uuidv4(),
         algorithm: 'HS256',
       },

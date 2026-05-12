@@ -14,40 +14,46 @@ export class ProfileRepositoryIml implements IProfileRepository {
   ) {}
 
   async findByUserId(userId: string): Promise<Profile | null> {
-    const profile = await this._profileModel.findOne({ user_id: userId });
+    const profile = await this._profileModel.findOne({
+      user_id: new Types.ObjectId(userId),
+    });
     if (!profile) return null;
     return ProfileMapper.toDomain(profile);
   }
 
   async create(
-    profile: Pick<
-      Profile,
-      'firstName' | 'lastName' | 'avatarPublicId' | 'avatarUrl' | 'userId'
-    >,
+    profile: Pick<Profile, 'firstName' | 'lastName' | 'avatar' | 'userId'>,
   ): Promise<Profile> {
     const profileDoc = ProfileMapper.toPersistence(profile);
     const createdProfile = await this._profileModel.create(profileDoc);
     return ProfileMapper.toDomain(createdProfile);
   }
 
-  async update(
-    profile: Pick<Profile, 'firstName' | 'lastName' | 'id'>,
-  ): Promise<Profile | null> {
-    const profileDoc = await this._profileModel.findById(profile.id);
+  async update({
+    userId,
+    firstName,
+    lastName,
+  }: {
+    userId: string;
+    firstName?: string;
+    lastName?: string;
+  }): Promise<Profile | null> {
+    const profileDoc = await this._profileModel.findOne({
+      user_id: new Types.ObjectId(userId),
+    });
     if (!profileDoc) return null;
-    profileDoc.first_name = profile.firstName;
-    profileDoc.last_name = profile.lastName;
+    if (firstName) profileDoc.first_name = firstName;
+    if (lastName) profileDoc.last_name = lastName;
     await profileDoc.save();
     return ProfileMapper.toDomain(profileDoc);
   }
 
   async updateAvatar(
-    avatar: Pick<Profile, 'avatarPublicId' | 'avatarUrl' | 'id'>,
+    data: Pick<Profile, 'avatar' | 'id'>,
   ): Promise<Profile | null> {
-    const profileDoc = await this._profileModel.findById(avatar.id);
+    const profileDoc = await this._profileModel.findById(data.id);
     if (!profileDoc) return null;
-    profileDoc.avatar_public_id = avatar.avatarPublicId;
-    profileDoc.avatar_url = avatar.avatarUrl;
+    profileDoc.avatar = data.avatar;
     await profileDoc.save();
     return ProfileMapper.toDomain(profileDoc);
   }
@@ -57,5 +63,34 @@ export class ProfileRepositoryIml implements IProfileRepository {
       user_id: new Types.ObjectId(userId),
     });
     return !!profile;
+  }
+
+  async updateAvatarByUserId({
+    userId,
+    avatar,
+  }: {
+    userId: string;
+    avatar: { publicId: string; version: number };
+  }): Promise<Profile | null> {
+    const profileDoc = await this._profileModel.findOne({
+      user_id: new Types.ObjectId(userId),
+    });
+    if (!profileDoc) return null;
+    profileDoc.avatar = {
+      public_id: avatar.publicId,
+      version: avatar.version,
+    };
+    await profileDoc.save();
+    return ProfileMapper.toDomain(profileDoc);
+  }
+
+  async deleteAvatarByUserId(userId: string): Promise<Profile | null> {
+    const profileDoc = await this._profileModel.findOne({
+      user_id: new Types.ObjectId(userId),
+    });
+    if (!profileDoc) return null;
+    profileDoc.avatar = null;
+    await profileDoc.save();
+    return ProfileMapper.toDomain(profileDoc);
   }
 }

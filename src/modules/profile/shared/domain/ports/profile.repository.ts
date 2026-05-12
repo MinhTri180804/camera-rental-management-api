@@ -4,21 +4,34 @@ export interface IProfileRepository {
   findByUserId: (userId: string) => Promise<Profile | null>;
 
   create: (
-    profile: Pick<
-      Profile,
-      'firstName' | 'lastName' | 'avatarPublicId' | 'avatarUrl' | 'userId'
-    >,
+    profile: Pick<Profile, 'firstName' | 'lastName' | 'avatar' | 'userId'>,
   ) => Promise<Profile>;
 
-  update: (
-    profile: Pick<Profile, 'firstName' | 'lastName' | 'id'>,
-  ) => Promise<Profile | null>;
+  update: ({
+    userId,
+    firstName,
+    lastName,
+  }: {
+    userId: string;
+    lastName?: string;
+    firstName?: string;
+  }) => Promise<Profile | null>;
 
   updateAvatar: (
-    avatar: Pick<Profile, 'avatarPublicId' | 'avatarUrl' | 'id'>,
+    avatar: Pick<Profile, 'avatar' | 'id'>,
   ) => Promise<Profile | null>;
 
+  updateAvatarByUserId: ({
+    userId,
+    avatar,
+  }: {
+    userId: string;
+    avatar: { publicId: string; version: number };
+  }) => Promise<Profile | null>;
+
   profileByUserIdIsExist: (userId: string) => Promise<boolean>;
+
+  deleteAvatarByUserId: (userId: string) => Promise<Profile | null>;
 }
 
 export const PROFILE_REPOSITORY_TOKEN = Symbol('PROFILE_REPOSITORY_TOKEN');

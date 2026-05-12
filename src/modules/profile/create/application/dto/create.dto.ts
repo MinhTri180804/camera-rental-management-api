@@ -1,15 +1,19 @@
-import { IsOptional, IsString } from 'class-validator';
+import {
+  IsFirstNamePattern,
+  IsLastNamePattern,
+} from '@modules/profile/shared/presentation/decorator';
+import { IsOptional } from 'class-validator';
 
 export class CreateProfileDTO {
-  @IsString()
+  @IsFirstNamePattern()
   firstName: string;
 
-  @IsString()
+  @IsLastNamePattern()
   lastName: string;
 
   @IsOptional()
-  avatarUrl?: string;
-
-  @IsOptional()
-  avatarPublicId?: string;
+  avatar?: {
+    public_id: string;
+    version: number;
+  };
 }
