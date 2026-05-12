@@ -5,9 +5,16 @@ import { ConfigModule } from '@config/config.module';
 import { DatabaseModule } from '@shared/infrastructure/database/database.module';
 import { AuthModule } from '@modules/auth/auth.module';
 import { ProfileModule } from '@modules/profile/profile.module';
+import { LocationModule } from '@modules/locations/location.module';
 
 @Module({
-  imports: [ConfigModule, DatabaseModule, AuthModule, ProfileModule],
+  imports: [
+    ConfigModule,
+    DatabaseModule,
+    AuthModule,
+    ProfileModule,
+    LocationModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
