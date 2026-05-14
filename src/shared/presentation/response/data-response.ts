@@ -11,7 +11,17 @@ export class ListDataResponse<T> {
   page: number;
   limit: number;
 
-  constructor(data: T[], total: number, page: number, limit: number) {
+  constructor({
+    data,
+    total,
+    page,
+    limit,
+  }: {
+    data: T[];
+    total: number;
+    page: number;
+    limit: number;
+  }) {
     this.listData = data;
     this.total = total;
     this.page = page;
