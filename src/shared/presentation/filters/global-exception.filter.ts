@@ -1,3 +1,4 @@
+import { NODE_ENV_ENUM } from '@common/constants/config/node-env.constants';
 import {
   ArgumentsHost,
   Catch,
@@ -11,6 +12,11 @@ import { ApiError } from '../response/api-error';
 
 @Catch()
 export class GlobalExceptionFilter implements ExceptionFilter {
+  private readonly _isDevelopmentMode: boolean;
+  constructor() {
+    this._isDevelopmentMode =
+      process.env.NODE_ENV === NODE_ENV_ENUM.DEVELOPMENT;
+  }
   /**
    * The catch method is called when an exception is thrown.
    *
@@ -22,6 +28,10 @@ export class GlobalExceptionFilter implements ExceptionFilter {
   catch(exception: any, host: ArgumentsHost): void {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
+
+    if (this._isDevelopmentMode) {
+      console.log('[GLOBAL EXCEPTION]: ', exception);
+    }
 
     if (exception instanceof UnauthorizedException) {
       const status = exception.getStatus();
