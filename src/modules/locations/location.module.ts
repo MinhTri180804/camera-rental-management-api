@@ -34,6 +34,6 @@ import { JwtAccessTokenModule } from '@shared/infrastructure';
     GetAllProvincesUseCase,
     GetAllWardsByProvinceUseCase,
   ],
-  exports: [],
+  exports: [MongooseModule],
 })
 export class LocationModule {}

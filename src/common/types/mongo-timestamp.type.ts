@@ -9,6 +9,6 @@
  *       the `createdAt` and `updatedAt` fields to your document type.
  */
 export type MongoTimestamp = {
-  created_at: Date;
-  updated_at: Date;
+  createdAt: Date;
+  updatedAt: Date;
 };

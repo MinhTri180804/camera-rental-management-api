@@ -8,8 +8,8 @@ export class UserMapper {
     entity.email = user.email;
     entity.password = user.password;
     entity.twoFactorEnabled = user.two_factor_enabled;
-    entity.createdAt = user.created_at;
-    entity.updatedAt = user.updated_at;
+    entity.createdAt = user.createdAt;
+    entity.updatedAt = user.updatedAt;
     return entity;
   }
 

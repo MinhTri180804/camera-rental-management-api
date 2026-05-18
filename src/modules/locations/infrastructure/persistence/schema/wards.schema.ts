@@ -54,7 +54,7 @@ export const WardsSchema = SchemaFactory.createForClass(WardsSchemaClass);
 
 WardsSchema.index({ code: 1 }, { unique: true });
 WardsSchema.index({ normalized_name: 1 });
-WardsSchema.index({ province_code: 1 });
+WardsSchema.index({ province_code: 1, code: 1 });
 
 export const WardsSchemaModel: ModelDefinition = {
   name: WardsSchemaClass.name,

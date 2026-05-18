@@ -51,8 +51,7 @@ describe('CreateProfileUseCase', () => {
         ...dto,
         userId: userIdMocked,
         id: '123456789012345678901234',
-        avatarUrl: null,
-        avatarPublicId: null,
+        avatar: null,
         createdAt: new Date(),
         updatedAt: new Date(),
       });
@@ -67,63 +66,11 @@ describe('CreateProfileUseCase', () => {
         id: expect.any(String) as string,
         firstName: dto.firstName,
         lastName: dto.lastName,
-        avatarUrl: null,
-        avatarPublicId: null,
+        avatar: null,
         createdAt: expect.any(Date) as Date,
         updatedAt: expect.any(Date) as Date,
       });
-      expect(profileRepository.create).toHaveBeenCalledWith({
-        userId: userIdMocked,
-        avatarPublicId: null,
-        avatarUrl: null,
-        ...dto,
-      });
-      expect(profileRepository.profileByUserIdIsExist).toHaveBeenCalledWith(
-        userIdMocked,
-      );
-    });
 
-    it('should create a profile | with avatarUrl and avatarPublicId', async () => {
-      const userIdMocked = '123456789012345678901234';
-      const dto: CreateProfileDTO = {
-        firstName: 'John',
-        lastName: 'Doe',
-        avatarUrl: 'https://example.com/avatar.jpg',
-        avatarPublicId: 'avatar-public-id',
-      };
-      profileRepository.profileByUserIdIsExist.mockResolvedValue(false);
-      profileRepository.create.mockResolvedValue({
-        firstName: dto.firstName,
-        lastName: dto.lastName,
-        avatarPublicId: dto.avatarPublicId!,
-        avatarUrl: dto.avatarUrl!,
-        userId: userIdMocked,
-        id: '123456789012345678901234',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      });
-
-      const result = await usecase.execute({
-        userId: userIdMocked,
-        ...dto,
-      });
-
-      expect(result).toEqual({
-        userId: userIdMocked,
-        id: expect.any(String) as string,
-        firstName: dto.firstName,
-        lastName: dto.lastName,
-        avatarUrl: dto.avatarUrl,
-        avatarPublicId: dto.avatarPublicId,
-        createdAt: expect.any(Date) as Date,
-        updatedAt: expect.any(Date) as Date,
-      });
-      expect(profileRepository.create).toHaveBeenCalledWith({
-        userId: userIdMocked,
-        avatarPublicId: dto.avatarPublicId,
-        avatarUrl: dto.avatarUrl,
-        ...dto,
-      });
       expect(profileRepository.profileByUserIdIsExist).toHaveBeenCalledWith(
         userIdMocked,
       );

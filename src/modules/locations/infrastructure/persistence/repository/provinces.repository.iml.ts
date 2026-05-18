@@ -27,7 +27,11 @@ export class ProvincesRepositoryImpl implements IProvincesRepository {
     normalizedName?: string,
   ): Promise<ProvinceEntity[]> {
     const filter: QueryFilter<ProvincesSchemaClass> = {};
-    if (normalizedName) filter.normalized_name = normalizedName;
+    if (normalizedName)
+      filter.normalized_name = {
+        $regex: `.*${normalizedName}*`,
+        $options: 'i',
+      };
     const provinces = await this.provincesModel.find(filter);
 
     return provinces.map((province) => ProvinceMapper.toDomain(province));
