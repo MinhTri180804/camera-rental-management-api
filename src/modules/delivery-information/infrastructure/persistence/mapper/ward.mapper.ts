@@ -6,6 +6,7 @@ export class WardMapper {
     const ward = new WardEntity();
     ward.code = wardDocument.code;
     ward.name = wardDocument.name;
+    ward.provinceCode = wardDocument.province_code;
     return ward;
   }
 }

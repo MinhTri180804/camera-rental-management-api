@@ -39,10 +39,9 @@ describe('CreateProfileController', () => {
       firstName: dto.firstName,
       lastName: dto.lastName,
       userId: '1',
-      avatarUrl: null,
-      avatarPublicId: null,
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      avatar: null,
+      createdAt: expect.any(Date) as Date,
+      updatedAt: expect.any(Date) as Date,
     });
 
     const result = await createProfileController.execute(dto, '1');
@@ -52,10 +51,9 @@ describe('CreateProfileController', () => {
       firstName: dto.firstName,
       lastName: dto.lastName,
       userId: '1',
-      avatarUrl: null,
-      avatarPublicId: null,
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      avatar: null,
+      createdAt: expect.any(Date) as Date,
+      updatedAt: expect.any(Date) as Date,
     });
   });
 

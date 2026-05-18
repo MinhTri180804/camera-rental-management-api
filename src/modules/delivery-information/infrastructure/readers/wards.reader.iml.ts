@@ -24,14 +24,22 @@ export class WardsReaderImpl implements IWardsReader {
     return !!ward;
   }
 
-  async findByCodeAndProvinceCode(
-    code: number,
-    provinceCode: number,
-  ): Promise<WardEntity | null> {
+  async findByCodeAndProvinceCode({
+    code,
+    provinceCode,
+  }: {
+    code: number;
+    provinceCode: number;
+  }): Promise<WardEntity | null> {
     const ward = await this._wardsModel.findOne({
       code,
       province_code: provinceCode,
     });
+    return ward ? WardMapper.toDomain(ward) : null;
+  }
+
+  async findByCode(code: number): Promise<WardEntity | null> {
+    const ward = await this._wardsModel.findOne({ code });
     return ward ? WardMapper.toDomain(ward) : null;
   }
 }

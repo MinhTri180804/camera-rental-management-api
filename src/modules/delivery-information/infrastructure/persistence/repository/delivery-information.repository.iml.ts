@@ -1,3 +1,4 @@
+import { normalizedName } from '@common/utils';
 import { DeliveryInformationEntity } from '@modules/delivery-information/domain/entities';
 import { IDeliveryInformationRepository } from '@modules/delivery-information/domain/ports/repositories';
 import { Injectable } from '@nestjs/common';
@@ -8,7 +9,6 @@ import {
   DeliveryInformationDocument,
   DeliveryInformationSchemaClass,
 } from '../schema';
-import { normalizedName } from '@common/utils';
 
 @Injectable()
 export class DeliveryInformationRepositoryImpl implements IDeliveryInformationRepository {
@@ -72,12 +72,12 @@ export class DeliveryInformationRepositoryImpl implements IDeliveryInformationRe
     deliveryInformationId,
     userId,
   }: {
-    data: Partial<
-      Omit<
-        DeliveryInformationEntity,
-        '_id' | 'createdAt' | 'updatedAt' | 'userId'
-      >
-    >;
+    data: {
+      address?: Partial<DeliveryInformationEntity['address']>;
+      name?: string;
+      fullNameRecipient?: string;
+      phoneRecipient?: string;
+    };
     deliveryInformationId: string;
     userId: string;
   }): Promise<DeliveryInformationEntity | null> {
@@ -90,8 +90,25 @@ export class DeliveryInformationRepositoryImpl implements IDeliveryInformationRe
     if (data.fullNameRecipient)
       updateQuery.fullname_recipient = data.fullNameRecipient;
     if (data.phoneRecipient) updateQuery.phone_recipient = data.phoneRecipient;
-    if (data.address) updateQuery.address = data.address;
+    if (data.address) {
+      if (data.address.province)
+        updateQuery['address.province'] = {
+          code: data.address.province.code,
+          name: data.address.province.name,
+          division_type: data.address.province.divisionType,
+        };
 
+      if (data.address.ward)
+        updateQuery['address.ward'] = {
+          code: data.address.ward.code,
+          name: data.address.ward.name,
+          division_type: data.address.ward.divisionType,
+          province_code: data.address.ward.provinceCode,
+        };
+
+      if (data.address.street)
+        updateQuery['address.street'] = data.address.street;
+    }
     const result = await this._deliveryInformationModel.findOneAndUpdate(
       {
         _id: new Types.ObjectId(deliveryInformationId),

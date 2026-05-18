@@ -51,10 +51,10 @@ export class CreateDeliveryInformationUseCase {
       });
     }
 
-    const wards = await this._wardsReader.findByCodeAndProvinceCode(
-      address.ward.code,
-      address.province.code,
-    );
+    const wards = await this._wardsReader.findByCodeAndProvinceCode({
+      provinceCode: address.province.code,
+      code: address.ward.code,
+    });
 
     if (!wards) {
       throw new WardsNotFoundException();

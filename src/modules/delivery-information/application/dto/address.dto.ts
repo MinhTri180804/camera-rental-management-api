@@ -1,15 +1,18 @@
-import { IsString, MaxLength, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
-import { AdministrativeUnitDTO } from './administrative-unit.dto';
+import { IsString, MaxLength, ValidateNested } from 'class-validator';
+import { ProvinceUnitDTO } from './province-unit.dto';
+import { WardUnitDTO } from './ward-unit.dto';
+import { WardProvinceMatch } from '@modules/delivery-information/presentation/validate';
 
 export class AddressDTO {
   @ValidateNested()
-  @Type(() => AdministrativeUnitDTO)
-  province: AdministrativeUnitDTO;
+  @Type(() => ProvinceUnitDTO)
+  province: ProvinceUnitDTO;
 
   @ValidateNested()
-  @Type(() => AdministrativeUnitDTO)
-  ward: AdministrativeUnitDTO;
+  @Type(() => WardUnitDTO)
+  @WardProvinceMatch()
+  ward: WardUnitDTO;
 
   @IsString()
   @MaxLength(255)

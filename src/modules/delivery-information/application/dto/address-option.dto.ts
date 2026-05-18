@@ -6,23 +6,24 @@ import {
   MaxLength,
   ValidateNested,
 } from 'class-validator';
-import { AdministrativeUnitDTO } from './administrative-unit.dto';
+import { ProvinceUnitDTO } from './province-unit.dto';
+import { WardUnitDTO } from './ward-unit.dto';
 
 export class AddressOptionDTO {
   @IsOptional()
   @IsNotEmptyObject()
   @ValidateNested()
-  @Type(() => AdministrativeUnitDTO)
-  province: AdministrativeUnitDTO;
+  @Type(() => ProvinceUnitDTO)
+  province?: ProvinceUnitDTO;
 
   @IsOptional()
   @IsNotEmptyObject()
   @ValidateNested()
-  @Type(() => AdministrativeUnitDTO)
-  ward: AdministrativeUnitDTO;
+  @Type(() => WardUnitDTO)
+  ward?: WardUnitDTO;
 
   @IsOptional()
   @IsString()
   @MaxLength(255)
-  street: string;
+  street?: string;
 }

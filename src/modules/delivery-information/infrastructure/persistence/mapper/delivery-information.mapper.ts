@@ -22,6 +22,7 @@ export class DeliveryInformationMapper {
         code: deliveryInformationDocument.address.ward.code,
         name: deliveryInformationDocument.address.ward.name,
         divisionType: deliveryInformationDocument.address.ward.division_type,
+        provinceCode: deliveryInformationDocument.address.ward.province_code,
       },
       street: deliveryInformationDocument.address.street,
     };
@@ -31,11 +32,11 @@ export class DeliveryInformationMapper {
       deliveryInformationDocument.fullname_recipient;
     deliveryInformation.phoneRecipient =
       deliveryInformationDocument.phone_recipient;
-    deliveryInformation.updatedAt = deliveryInformationDocument.created_at;
-    deliveryInformation.createdAt = deliveryInformationDocument.updated_at;
     deliveryInformation.addressTextFull = `${deliveryInformationDocument.address.street}, ${deliveryInformationDocument.address.ward.name}, ${deliveryInformationDocument.address.province.name}`;
     deliveryInformation.normalizedName =
       deliveryInformationDocument.normalized_name;
+    deliveryInformation.updatedAt = deliveryInformationDocument.updatedAt;
+    deliveryInformation.createdAt = deliveryInformationDocument.createdAt;
     return deliveryInformation;
   }
 
@@ -61,6 +62,7 @@ export class DeliveryInformationMapper {
           code: data.address.ward.code,
           name: data.address.ward.name,
           division_type: data.address.ward.divisionType,
+          province_code: data.address.ward.provinceCode,
         },
         street: data.address.street,
       },

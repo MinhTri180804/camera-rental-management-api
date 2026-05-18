@@ -60,6 +60,7 @@ export class DeliveryInformationSchemaClass {
         code: Number,
         name: String,
         division_type: String,
+        province_code: Number,
       },
       street: String,
     },
@@ -75,6 +76,7 @@ export class DeliveryInformationSchemaClass {
       code: number;
       name: string;
       division_type: string;
+      province_code: number;
     };
 
     street: string;

@@ -23,12 +23,12 @@ export interface IDeliveryInformationRepository {
     deliveryInformationId,
     userId,
   }: {
-    data: Partial<
-      Omit<
-        DeliveryInformationEntity,
-        '_id' | 'createdAt' | 'updatedAt' | 'userId'
-      >
-    >;
+    data: {
+      address?: Partial<DeliveryInformationEntity['address']>;
+      name?: string;
+      fullNameRecipient?: string;
+      phoneRecipient?: string;
+    };
     deliveryInformationId: string;
     userId: string;
   }): Promise<DeliveryInformationEntity | null>;

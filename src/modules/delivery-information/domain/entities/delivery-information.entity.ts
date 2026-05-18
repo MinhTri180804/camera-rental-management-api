@@ -15,6 +15,7 @@ export class DeliveryInformationEntity {
       code: number;
       name: string;
       divisionType: string;
+      provinceCode: number;
     };
     street: string;
   };

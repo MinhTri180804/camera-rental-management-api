@@ -8,8 +8,8 @@ export class ProfileMapper {
     entity.id = profile._id.toString();
     entity.firstName = profile.first_name;
     entity.lastName = profile.last_name;
-    entity.createdAt = profile.created_at;
-    entity.updatedAt = profile.updated_at;
+    entity.createdAt = profile.createdAt;
+    entity.updatedAt = profile.updatedAt;
     entity.avatar = profile.avatar
       ? {
           public_id: profile.avatar.public_id,

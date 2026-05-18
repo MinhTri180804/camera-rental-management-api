@@ -1,6 +1,6 @@
 import { IsInt, IsString, MaxLength, Min } from 'class-validator';
 
-export class AdministrativeUnitDTO {
+export class WardUnitDTO {
   @IsInt()
   @Min(1)
   code: number;
@@ -12,4 +12,8 @@ export class AdministrativeUnitDTO {
   @IsString()
   @MaxLength(50)
   divisionType: string;
+
+  @IsInt()
+  @Min(1)
+  provinceCode: number;
 }
