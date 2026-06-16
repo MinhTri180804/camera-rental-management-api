@@ -4,7 +4,9 @@ import {
 } from '@config/cloudinary/cloudinary.config';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { v2 as cloudinary } from 'cloudinary';
+import { v2 as cloudinary, UploadApiResponse } from 'cloudinary';
+import { UploadImageCloudinaryException } from './exceptions';
+import { Readable } from 'stream';
 
 @Injectable()
 export class CloudinaryService {
@@ -38,5 +40,53 @@ export class CloudinaryService {
 
   deleteAsset(publicId: string) {
     return cloudinary.uploader.destroy(publicId);
+  }
+
+  async uploadImage(
+    file: Express.Multer.File,
+    folder: string,
+  ): Promise<UploadApiResponse> {
+    return new Promise<UploadApiResponse>((resolve, reject) => {
+      const uploadStream = cloudinary.uploader.upload_stream(
+        {
+          folder,
+          use_filename: false,
+          unique_filename: true,
+          resource_type: 'image',
+          format: 'webp',
+          overwrite: false,
+          invalidate: true,
+        },
+        (error, result) => {
+          if (error) {
+            reject(
+              new UploadImageCloudinaryException({
+                message: error.message,
+                name: error.name,
+                httpCode: error.http_code,
+                requestId: error.request_id,
+              }),
+            );
+            return;
+          }
+
+          if (!result) {
+            reject(
+              new UploadImageCloudinaryException({
+                message: 'Upload failed: no result',
+                name: 'NO_RESULT',
+                httpCode: 500,
+                requestId: undefined,
+              }),
+            );
+            return;
+          }
+
+          resolve(result);
+        },
+      );
+
+      Readable.from(file.buffer).pipe(uploadStream);
+    });
   }
 }

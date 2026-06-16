@@ -1,16 +1,24 @@
 type CleanObjectParams = {
   object: object;
-  includeNull?: boolean;
   includeUndefined?: boolean;
+  keepNullFields?: string[];
 };
 export function cleanObject({
   object,
-  includeNull = false,
+  keepNullFields = [],
   includeUndefined = true,
 }: CleanObjectParams) {
-  for (const key of Object.keys(object)) {
-    if ((includeNull || includeUndefined) && !object[key]) delete object[key];
-  }
+  return Object.fromEntries(
+    Object.entries(object).filter(([key, value]) => {
+      if (value === undefined && !includeUndefined) {
+        return false;
+      }
 
-  return object;
+      if (value === null && !keepNullFields.includes(key)) {
+        return false;
+      }
+
+      return true;
+    }),
+  );
 }

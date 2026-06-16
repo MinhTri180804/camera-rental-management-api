@@ -10,4 +10,8 @@
  */
 export const CLOUDINARY_PRESET = {
   USER_AVATAR: 'user_avatar',
+  BANNER_BRAND: 'banner_brand',
 } as const;
+
+export type CloudinaryPreset =
+  (typeof CLOUDINARY_PRESET)[keyof typeof CLOUDINARY_PRESET];

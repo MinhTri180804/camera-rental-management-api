@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { NODE_ENV_ENUM } from '@common/constants/config/node-env.constants';
 import {
   ArgumentsHost,
@@ -31,6 +34,28 @@ export class GlobalExceptionFilter implements ExceptionFilter {
 
     if (this._isDevelopmentMode) {
       console.log('[GLOBAL EXCEPTION]: ', exception);
+    }
+
+    if (exception?.code === 11000) {
+      const field = Object.keys(exception.keyPattern)[0];
+      const value = exception.keyValue[field];
+
+      const responseBody: ApiError = {
+        success: false,
+        error: {
+          code: 'CONFLICT',
+          message: `${field} '${value}' already exists`,
+          details: [
+            {
+              field: field,
+              message: `${field} '${value}' already exists`,
+            },
+          ],
+        },
+      };
+
+      response.status(HttpStatus.CONFLICT).json(responseBody);
+      return;
     }
 
     if (exception instanceof UnauthorizedException) {
