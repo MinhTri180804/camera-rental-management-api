@@ -13,3 +13,5 @@ export {
   ProfileSchemaClass,
   ProfileSchemaModel,
 } from './profile.schema';
+
+export * from './base.schema';

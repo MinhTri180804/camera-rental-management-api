@@ -11,7 +11,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const reflector = new Reflector();
 
-  app.useGlobalPipes(new StrictValidationPipe());
+  app.useGlobalPipes(new StrictValidationPipe(reflector));
   app.useGlobalGuards(new JwtAccessTokenGuard(reflector));
 
   app.useGlobalInterceptors(new ResponseInterceptor(reflector));

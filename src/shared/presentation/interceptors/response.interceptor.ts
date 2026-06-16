@@ -51,6 +51,9 @@ export class ResponseInterceptor<T> implements NestInterceptor<
               page: data.page,
               limit: data.limit,
               total: data.total,
+              totalPage: data.totalPages,
+              hasNextPage: data.hasNextPage,
+              hasPreviousPage: data.hasPreviousPage,
             },
           };
         }
