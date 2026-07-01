@@ -1,0 +1,15 @@
+$kind: http-request
+name: Create
+method: POST
+url: '{{baseUrl}}/profile'
+order: 1000
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "firstName": "John",
+      "lastName": "Doe"
+    }

@@ -6,7 +6,7 @@ import {
   type MediaType,
 } from '@modules/media/presentation/constants';
 import { ModelDefinition, Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { BaseSchemaClass, USERS_COLLECTION_NAME } from '@shared/infrastructure';
+import { BaseSchemaClass } from '@shared/infrastructure';
 import { HydratedDocument, Types } from 'mongoose';
 import { MEDIA_FOLDER_COLLECTION_NAME } from './media-folder.schema';
 
@@ -56,9 +56,6 @@ export class MediaSchemaClass extends BaseSchemaClass {
 
   @Prop({ enum: MEDIA_STATUS, required: true })
   status: MediaStatus;
-
-  @Prop({ type: Types.ObjectId, required: true, ref: USERS_COLLECTION_NAME })
-  created_by: Types.ObjectId;
 }
 
 export const MediaSchema = SchemaFactory.createForClass(MediaSchemaClass);

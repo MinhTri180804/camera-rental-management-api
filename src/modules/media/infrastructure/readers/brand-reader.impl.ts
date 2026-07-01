@@ -27,9 +27,15 @@ export class BrandReaderImpl extends BrandReader {
     const records = await this._brandModel
       .find(
         {
-          $or: fields.map((field) => ({
-            [field]: new Types.ObjectId(mediaId),
-          })),
+          $or: fields.map((field) => {
+            if (field === 'banners') {
+              return { [field]: { $in: [new Types.ObjectId(mediaId)] } };
+            }
+
+            return {
+              [field]: new Types.ObjectId(mediaId),
+            };
+          }),
         },
         Object.fromEntries(fields.map((field) => [field, 1])),
       )

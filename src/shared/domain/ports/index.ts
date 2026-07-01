@@ -16,3 +16,9 @@ export {
 
 export { type IOtpService } from './otp.service';
 export { type IQueueService } from './queue.service';
+
+export {
+  type ITransactionContext,
+  type ITransactionManagerService,
+  TRANSACTION_MANAGER_SERVICE,
+} from './transaction-manager.service';

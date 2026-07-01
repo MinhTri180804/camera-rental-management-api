@@ -1,0 +1,7 @@
+$kind: http-request
+name: Get Details
+url: "{{baseUrl}}/admin/categories/6a3554633afeb7671c0f69c5"
+method: GET
+headers:
+  Authorization: Bearer {{accessToken}}
+order: 3186293046514718

@@ -1,0 +1,7 @@
+$kind: http-request
+name: Get All Provinces
+url: "{{baseUrl}}/locations/provinces"
+method: GET
+headers:
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QyQGV4YW1wbGUuY29tIiwic3ViIjoiNjlmYzZkNDg5ZWRjMmE3MmI5MTVmMGE3IiwiaWF0IjoxNzc4NTkxMTQxLCJleHAiOjE3Nzg1OTIwNDEsImp0aSI6IjM5MjM1YjhmLTk1ZDctNDc2My1hYTI2LTEzMDc2NDcxZDgwZCJ9.7Xk-XPmNbALI5eD7ZNysLXuBSrF0oNGo0MR88qkrXA0
+order: 1778546369868

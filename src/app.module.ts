@@ -11,6 +11,7 @@ import { BrandModule } from '@modules/brand/brand.module';
 import { BullBoardModule } from '@bull-board/nestjs';
 import { ExpressAdapter } from '@bull-board/express';
 import { MediaModule } from '@modules/media/media.module';
+import { CategoryModule } from '@modules/category/category.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { MediaModule } from '@modules/media/media.module';
     DeliveryInformationModule,
     BrandModule,
     MediaModule,
+    CategoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],

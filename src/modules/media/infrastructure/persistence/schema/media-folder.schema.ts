@@ -40,9 +40,6 @@ export class MediaFolderSchemaClass extends BaseSchemaClass {
     default: null,
   })
   parent_id: Types.ObjectId | null;
-
-  @Prop({ type: Types.ObjectId, ref: USERS_COLLECTION_NAME, required: true })
-  created_by: Types.ObjectId;
 }
 
 export const MediaFolderSchema = SchemaFactory.createForClass(

@@ -1,0 +1,15 @@
+$kind: http-request
+name: Update Avatar
+method: PATCH
+url: '{{baseUrl}}/profile/me/avatar'
+order: 4000
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "publicId": "users/abc123/avatar/current",
+      "version": 1234567890
+    }

@@ -1,0 +1,7 @@
+$kind: http-request
+name: Change Parent
+url: "{{baseUrl}}/admin/categories/change-parent/6a3577ec9d8dfb140ac7f6c7"
+method: PATCH
+headers:
+  Authorization: Bearer {{accessToken}}
+order: 3094782746297258

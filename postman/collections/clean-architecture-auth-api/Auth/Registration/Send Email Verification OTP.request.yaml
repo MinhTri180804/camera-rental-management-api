@@ -1,0 +1,14 @@
+$kind: http-request
+name: Send Email Verification OTP
+method: POST
+url: "{{baseUrl}}/auth/register/send-email-verification-otp"
+order: 1000
+description: Sends an OTP to the provided email for registration verification.
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "email": "user2@example.com"
+    }

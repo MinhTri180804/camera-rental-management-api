@@ -1,0 +1,5 @@
+$kind: http-request
+name: Get me
+method: GET
+url: '{{baseUrl}}/profile/me'
+order: 2000

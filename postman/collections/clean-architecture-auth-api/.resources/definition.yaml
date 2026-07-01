@@ -1,0 +1,12 @@
+$kind: collection
+name: Clean Architecture Auth API
+variables:
+  - key: baseUrl
+    value: 'http://localhost:3000'
+  - key: accessToken
+    value: ''
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{accessToken}}'

@@ -1,0 +1,18 @@
+$kind: http-request
+name: Verify Email Verification OTP
+method: POST
+url: "{{baseUrl}}/auth/register/verify-email-verification-otp"
+order: 3000
+description: Verifies the OTP and completes registration. Returns accessToken
+  and refreshToken. Password must be at least 8 characters with uppercase,
+  lowercase, number, and special character. OTP must be 6 digits.
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "email": "user@example.com",
+      "otp": "389020",
+      "password": "Password@123"
+    }

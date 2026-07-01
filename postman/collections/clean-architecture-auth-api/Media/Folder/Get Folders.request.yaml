@@ -1,0 +1,10 @@
+$kind: http-request
+name: Get Folders
+method: GET
+url: "{{baseUrl}}/media-folders?parentId=6a26ba71c09ef8c50903f00a"
+headers:
+  Authorization: Bearer {{accessToken}}
+order: 1000
+queryParams:
+  - key: parentId
+    value: 6a26ba71c09ef8c50903f00a

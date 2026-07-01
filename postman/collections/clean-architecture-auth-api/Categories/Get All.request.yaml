@@ -1,0 +1,10 @@
+$kind: http-request
+name: Get All
+method: GET
+url: '{{baseUrl}}/admin/categories'
+order: 2000
+queryParams:
+  - key: page
+    value: '1'
+  - key: limit
+    value: '10'

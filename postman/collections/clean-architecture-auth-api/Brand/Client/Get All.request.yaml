@@ -1,0 +1,9 @@
+$kind: http-request
+url: "{{baseUrl}}/brands/apple"
+method: GET
+headers:
+  - key: Authorization
+    value: Bearer
+      eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlQGV4YW1wbGUuY29tIiwic3ViIjoiNmExM2U2NDJkMzhmYjUyYzNkZjNjYmNkIiwiaWF0IjoxNzc5Njg5MDI2LCJleHAiOjE3Nzk2ODk5MjYsImp0aSI6IjcxMjdiODEzLTFjNDMtNDMwOS05MmM4LWI3MTE5NjYxM2JmYyJ9.6eizSROn1VdLXRe8vB61dt44WIMXLs7LWcWdGJ_pOYQ
+    disabled: true
+order: 4483504951804953

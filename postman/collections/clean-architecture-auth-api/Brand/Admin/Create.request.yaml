@@ -1,0 +1,27 @@
+$kind: http-request
+name: Create
+method: POST
+url: '{{baseUrl}}/admin/brands'
+order: 1000
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Nike",
+      "slug": "nike",
+      "description": "Just Do It",
+      "logoDarkMode": null,
+      "logoLightMode": null,
+      "banners": [],
+      "originCountry": "USA",
+      "websiteUrl": "https://www.nike.com",
+      "isActive": true,
+      "seo": {
+        "title": "Nike",
+        "description": "Nike official brand page",
+        "keywords": ["nike", "shoes", "sportswear"]
+      }
+    }

@@ -34,6 +34,8 @@ export class MongoDBFactory implements MongooseOptionsFactory {
     return {
       uri: `mongodb://${user}:${password}@${host}:${port}`,
       dbName,
+      authSource: 'admin',
+      replicaSet: 'rs0',
       timeoutMS: this.TIMEOUT_MS,
       autoIndex: this.AUTO_INDEX,
       serverSelectionTimeoutMS: this.SERVER_SELECTION_TIMEOUT_MS,

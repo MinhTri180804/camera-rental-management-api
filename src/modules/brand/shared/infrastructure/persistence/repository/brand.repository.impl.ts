@@ -197,6 +197,13 @@ export class BrandRepositoryImpl implements IBrandRepository {
     data: Partial<BrandEntity>,
   ): Promise<BrandEntity | null> {
     const flatData = flattenObject(data);
+
+    if (data.banners) {
+      flatData.banners = (data.banners as string[]).map(
+        (banner) => new Types.ObjectId(banner),
+      );
+    }
+
     const brand = await this._brandModel
       .findByIdAndUpdate(
         id,
