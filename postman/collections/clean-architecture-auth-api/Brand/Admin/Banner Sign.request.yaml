@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{baseUrl}}/admin/brands/6a1431a88e8aa822ff439938/banner/"
+method: POST
+order: 4412099942547634

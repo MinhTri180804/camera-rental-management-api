@@ -1,0 +1,7 @@
+$kind: http-request
+name: Get All Wards By Province
+url: "{{baseUrl}}/locations/wards/79"
+method: GET
+headers:
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QyQGV4YW1wbGUuY29tIiwic3ViIjoiNjlmYzZkNDg5ZWRjMmE3MmI5MTVmMGE3IiwiaWF0IjoxNzc4NTg0NDgyLCJleHAiOjE3Nzg1ODUzODIsImp0aSI6ImE4MTY1YTJmLTU0NzQtNDkxMC05N2E5LWQ1ZjIyMmI5MWJjNyJ9.wYeVvQoDCpqG7MHJlI7HNxIYuT_X8hWTP2OShY8JlS4
+order: 2092392123660318

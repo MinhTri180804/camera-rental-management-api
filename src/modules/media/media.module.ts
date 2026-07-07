@@ -1,3 +1,5 @@
+import { BrandModule } from '@modules/brand/brand.module';
+import { CategoriesSchemaModel } from '@modules/category/shared/infrastructure/persistence/schema';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { JwtAccessTokenModule } from '@shared/infrastructure';
@@ -11,6 +13,7 @@ import {
 } from './application/usecase';
 import {
   BRAND_READER,
+  CATEGORY_MEDIA_USAGE_READER,
   MEDIA_FOLDER_REPOSITORY,
   MEDIA_REPOSITORY,
   MEDIA_STORAGE_SERVICE,
@@ -27,16 +30,22 @@ import {
   MediaFolderSchemaModel,
   MediaSchemaModel,
 } from './infrastructure/persistence/schema';
+import {
+  BrandReaderImpl,
+  CategoryMediaUsageReaderImpl,
+} from './infrastructure/readers';
 import { MediaFolderController } from './presentation/media-folder.controller';
 import { MediaController } from './presentation/media.controller';
-import { BrandModule } from '@modules/brand/brand.module';
-import { BrandReaderImpl } from './infrastructure/readers';
 
 @Module({
   imports: [
     CloudinaryModule,
     JwtAccessTokenModule,
-    MongooseModule.forFeature([MediaSchemaModel, MediaFolderSchemaModel]),
+    MongooseModule.forFeature([
+      MediaSchemaModel,
+      MediaFolderSchemaModel,
+      CategoriesSchemaModel,
+    ]),
     BrandModule,
   ],
   providers: [
@@ -61,9 +70,13 @@ import { BrandReaderImpl } from './infrastructure/readers';
       useClass: BrandReaderImpl,
     },
     {
+      provide: CATEGORY_MEDIA_USAGE_READER,
+      useClass: CategoryMediaUsageReaderImpl,
+    },
+    {
       provide: MediaUsageReader,
       useFactory: (...readers: MediaUsageReader[]) => readers,
-      inject: [BRAND_READER],
+      inject: [BRAND_READER, CATEGORY_MEDIA_USAGE_READER],
     },
     GetAllMediaFolderUseCase,
     CreateMediaFolderUseCase,
@@ -72,5 +85,6 @@ import { BrandReaderImpl } from './infrastructure/readers';
     GetAllMediaUseCase,
   ],
   controllers: [MediaController, MediaFolderController],
+  exports: [MongooseModule],
 })
 export class MediaModule {}

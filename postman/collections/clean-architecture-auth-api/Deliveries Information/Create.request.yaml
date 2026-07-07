@@ -1,0 +1,27 @@
+$kind: http-request
+name: Create
+method: POST
+url: '{{baseUrl}}/deliveries-information'
+order: 1000
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Home Address",
+      "fullNameRecipient": "Nguyen Van A",
+      "phoneRecipient": "0901234567",
+      "address": {
+        "province": {
+          "id": "01",
+          "name": "Hà Nội"
+        },
+        "ward": {
+          "id": "00001",
+          "name": "Phường Phúc Xá"
+        },
+        "street": "123 Đường ABC"
+      }
+    }

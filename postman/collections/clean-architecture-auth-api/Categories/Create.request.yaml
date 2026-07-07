@@ -1,0 +1,62 @@
+$kind: http-request
+name: Create
+method: POST
+url: "{{baseUrl}}/admin/categories"
+order: 1000
+headers:
+  Authorization: bearer {{accessToken}}
+body:
+  type: json
+  content: |-
+    {
+      "name": "Iphone 14 Pro  series",
+      "description": "Iphone 14 Pro  series description",
+      "parentId": "6a4367175992ff89f9f95ab2",
+      "sortOrder": 1,
+      "isActive": true,
+      "classificationType": "general",
+      "image": "6a43637f5992ff89f9f95a99",
+      "banners": ["6a43637f5992ff89f9f95a99", "6a43637f5992ff89f9f95a99"],
+    //   "brandRef": "6a30c4a2e6f64ffaa68bc1a9",
+      "seo": {
+        "title": "Điện thoại Iphone 14 series thông minh - Mua sắm online",
+        "description": "Khám phá các dòng điện thoại thông minh mới nhất",
+        "keywords": ["điện thoại", "smartphone", "mobile"]
+      },
+      "inheritSpecs": true,
+    //   "specSchema": []
+      "specSchema": [
+        {
+          "type": "select",
+          "key": "ram",
+          "label": "RAM",
+          "unit": "GB",
+          "filterable": true,
+          "compareEnabled": true,
+          "options": [4, 6, 8, 12, 16],
+          "multiple": true,
+          "sortOrder": 1
+        },
+        {
+          "type": "range",
+          "key": "battery_capacity",
+          "label": "Dung lượng pin",
+          "filterable": true,
+          "compareEnabled": true,
+          "unit": "mAh",
+          "min": 1000,
+          "max": 10000,
+          "step": 10,
+          "sortOrder": 1
+        },
+        {
+          "type": "boolean",
+          "key": "has_5g",
+          "label": "Hỗ trợ 5G",
+          "filterable": true,
+          "compareEnabled": true,
+          "unit": null,
+          "sortOrder": 2
+        }
+      ]
+    }

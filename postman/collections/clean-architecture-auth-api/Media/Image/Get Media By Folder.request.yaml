@@ -1,0 +1,13 @@
+$kind: http-request
+name: Get Media By Folder
+method: GET
+url: '{{baseUrl}}/media'
+order: 3000
+queryParams:
+  - key: page
+    value: '1'
+  - key: limit
+    value: '10'
+  - key: folderId
+    value: ''
+    disabled: true

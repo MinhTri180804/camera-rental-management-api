@@ -1,0 +1,30 @@
+$kind: http-request
+name: Update Me
+method: PATCH
+url: '{{baseUrl}}/deliveries-information/me/:id'
+order: 4000
+pathVariables:
+  - key: id
+    value: '64f1a2b3c4d5e6f7a8b9c0d1'
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Office Address",
+      "fullNameRecipient": "Nguyen Van B",
+      "phoneRecipient": "0901234568",
+      "address": {
+        "province": {
+          "id": "01",
+          "name": "Hà Nội"
+        },
+        "ward": {
+          "id": "00001",
+          "name": "Phường Phúc Xá"
+        },
+        "street": "456 Đường XYZ"
+      }
+    }

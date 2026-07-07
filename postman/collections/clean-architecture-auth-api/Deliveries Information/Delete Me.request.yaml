@@ -1,0 +1,8 @@
+$kind: http-request
+name: Delete Me
+method: DELETE
+url: '{{baseUrl}}/deliveries-information/me/:id'
+order: 5000
+pathVariables:
+  - key: id
+    value: '64f1a2b3c4d5e6f7a8b9c0d1'

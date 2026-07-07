@@ -1,0 +1,16 @@
+$kind: http-request
+name: Upload Image
+method: POST
+url: '{{baseUrl}}/media/image/upload'
+order: 1000
+body:
+  type: formdata
+  content:
+    - key: image
+      type: file
+      src: ''
+      description: Image file to upload
+    - key: folderId
+      type: text
+      value: ''
+      description: Optional folder ID

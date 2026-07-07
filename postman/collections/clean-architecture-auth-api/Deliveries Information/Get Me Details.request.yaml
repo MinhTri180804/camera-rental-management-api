@@ -1,0 +1,8 @@
+$kind: http-request
+name: Get Me Details
+method: GET
+url: '{{baseUrl}}/deliveries-information/me/:id'
+order: 3000
+pathVariables:
+  - key: id
+    value: '64f1a2b3c4d5e6f7a8b9c0d1'

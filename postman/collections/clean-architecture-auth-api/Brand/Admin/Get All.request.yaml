@@ -1,0 +1,16 @@
+$kind: http-request
+name: Get All
+method: GET
+url: '{{baseUrl}}/admin/brands'
+order: 2000
+queryParams:
+  - key: page
+    value: '1'
+  - key: limit
+    value: '10'
+  - key: includeNoActive
+    value: '0'
+    disabled: true
+  - key: deleted
+    value: 'ALL'
+    disabled: true

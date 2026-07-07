@@ -9,7 +9,7 @@ import {
   IsKeywordSeoPattern,
   IsTitleSeoPattern,
 } from '@modules/brand/shared/presentation/decorators/validators/brand/seo';
-import { IsDescriptionSeoPattern } from '@modules/category/presentation/decorator/validator/category/seo';
+import { IsDescriptionSeoPattern } from '@modules/category/shared/presentation/decorator/validator/category/seo';
 import { KeepNullFields } from '@shared/presentation';
 import { Type } from 'class-transformer';
 import {

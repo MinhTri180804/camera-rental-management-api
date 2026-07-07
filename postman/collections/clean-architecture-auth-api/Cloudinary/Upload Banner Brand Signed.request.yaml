@@ -1,0 +1,39 @@
+$kind: http-request
+name: Upload Banner Brand Signed
+url: https://api.cloudinary.com/v1_1/dpyeptf5z/image/upload
+method: POST
+body:
+  type: formdata
+  content:
+    - type: text
+      key: timestamp
+      value: "1779781233"
+      description: ""
+      disabled: false
+    - type: text
+      key: signature
+      value: 5f583c94509e17056e406628234ad3e64e1faffa
+      description: ""
+      disabled: false
+    - type: text
+      key: folder
+      value: brands/6a1431a88e8aa822ff439938/banners
+      description: ""
+      disabled: false
+    - type: file
+      key: file
+      src:
+        - postman-cloud:///1f158d07-7e34-4160-b08f-1b19abe8af69
+      description: ""
+      disabled: false
+    - type: text
+      key: api_key
+      value: "455647517814819"
+      description: ""
+      disabled: false
+    - type: text
+      key: upload_preset
+      value: banner_brand
+      description: ""
+      disabled: false
+order: 3252429753286510

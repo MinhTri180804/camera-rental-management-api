@@ -1,0 +1,15 @@
+$kind: http-request
+name: Resend Email Verification OTP
+method: POST
+url: "{{baseUrl}}/auth/register/send-email-verification-otp/resend"
+order: 2000
+description: Resends the email verification OTP if the previous one expired or
+  was not received.
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "email": "user@example.com"
+    }

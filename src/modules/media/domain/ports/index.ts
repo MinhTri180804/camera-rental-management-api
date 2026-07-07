@@ -15,3 +15,7 @@ export {
 } from './media-usage.service';
 export { MediaUsageReader } from './media-usage.reader';
 export { BrandReader, BRAND_READER } from './brand.reader';
+export {
+  CategoryMediaUsageReaderAbstract,
+  CATEGORY_MEDIA_USAGE_READER,
+} from './category-media-usage.reader';

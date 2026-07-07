@@ -1,0 +1,23 @@
+$kind: http-request
+name: Update
+method: PATCH
+url: '{{baseUrl}}/admin/brands/:id'
+order: 4000
+pathVariables:
+  - key: id
+    value: '64f1a2b3c4d5e6f7a8b9c0d1'
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Nike Updated",
+      "description": "Updated description",
+      "seo": {
+        "title": "Nike Updated",
+        "description": "Updated SEO description",
+        "keywords": ["nike", "shoes"]
+      }
+    }

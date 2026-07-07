@@ -83,9 +83,6 @@ export class BrandSchemaClass extends BaseSchemaClass {
 
   @Prop({ type: Number, required: true, default: 0 })
   product_count: number;
-
-  @Prop({ type: Types.ObjectId, required: true })
-  created_by: Types.ObjectId;
 }
 
 export const BrandSchema = SchemaFactory.createForClass(BrandSchemaClass);

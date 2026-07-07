@@ -1,0 +1,37 @@
+$kind: http-example
+description: Authenticates a user and returns accessToken and refreshToken.
+request:
+  url: "{{baseUrl}}/auth/login"
+  method: POST
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "email": "te@example.com",
+        "password": "Password@123"
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    x-powered-by: Express
+    content-type: application/json; charset=utf-8
+    content-length: "624"
+    etag: W/"270-lofBhCxRm7fYcFf86D23h+NVXu4"
+    date: Mon, 22 Jun 2026 12:24:34 GMT
+    connection: keep-alive
+    keep-alive: timeout=5
+  body:
+    type: json
+    content: |-
+      {
+        "success": true,
+        "message": "Login is successfully",
+        "data": {
+          "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlQGV4YW1wbGUuY29tIiwic3ViIjoiNmExM2U2NDJkMzhmYjUyYzNkZjNjYmNkIiwiaWF0IjoxNzgyMTMxMDc0LCJleHAiOjE3ODIxMzgyNzQsImp0aSI6ImY5ODVjYTEwLWYwZDktNGRhMy1hMTA4LWY2MTJmZDY0YTljMCJ9.jekNCGVkX2_b3uZSWYf-hPuOtSYdqVMuvQhAo-xeJnk",
+          "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlQGV4YW1wbGUuY29tIiwic3ViIjoiNmExM2U2NDJkMzhmYjUyYzNkZjNjYmNkIiwiaWF0IjoxNzgyMTMxMDc0LCJleHAiOjE3ODI3MzU4NzQsImp0aSI6ImViYmI2MGVlLTY1NzMtNDM5NS1hZmMwLTgwMDdhYTMwMWRmOCJ9.Jg7xXdW8Iqde6luLkHlt1xYh2-bx8rIRA_g5ii8fsxo"
+        }
+      }
+order: 1782131078091

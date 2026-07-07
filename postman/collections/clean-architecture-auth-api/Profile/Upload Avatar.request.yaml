@@ -1,0 +1,5 @@
+$kind: http-request
+name: Upload Avatar Signature
+method: POST
+url: '{{baseUrl}}/profile/me/upload/avatar-signature'
+order: 6000

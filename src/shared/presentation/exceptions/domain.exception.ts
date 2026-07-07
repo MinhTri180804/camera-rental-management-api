@@ -8,4 +8,21 @@ export class DomainException extends Error {
     super(message);
     this.name = 'DomainException';
   }
+
+  protected static buildErrorCode({
+    module,
+    resource,
+    errorType,
+  }: {
+    module: string;
+    resource: string;
+    errorType: string;
+  }) {
+    return `${module}__${resource}__${errorType}`;
+  }
+
+  protected static parseErrorCode(code: string) {
+    const [module, resource, errorType] = code.split('__');
+    return { module, resource, errorType };
+  }
 }

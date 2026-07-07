@@ -1,0 +1,54 @@
+$kind: http-request
+name: Upload Image Signed
+url: https://api.cloudinary.com/v1_1/dpyeptf5z/image/upload
+method: POST
+body:
+  type: formdata
+  content:
+    - type: file
+      key: file
+      src:
+        - postman-cloud:///1f14c5b3-0535-4aa0-84c1-1e10f5ee821f
+      description: ""
+      disabled: false
+    - type: text
+      key: timestamp
+      value: "1778409266"
+      description: ""
+      disabled: false
+    - type: text
+      key: signature
+      value: ff1e2d50fba4e862091b6f2cba9cd9e037431649
+      description: ""
+      disabled: false
+    - type: text
+      key: api_key
+      value: "455647517814819"
+      description: ""
+      disabled: false
+    - type: text
+      key: upload_preset
+      value: user_avatar
+      description: ""
+      disabled: false
+    - type: text
+      key: folder
+      value: users/69fc6d489edc2a72b915f0a7/avatar
+      description: ""
+      disabled: false
+    - type: text
+      key: public_id
+      value: current
+      description: ""
+      disabled: false
+    - type: text
+      key: invalidate
+      value: "true"
+      description: ""
+      disabled: false
+settings:
+  strictSSL: false
+  followRedirects: true
+  disableCookies: false
+  maxResponseSize: 52428800
+order: 3944978330408863

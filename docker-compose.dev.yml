@@ -1,12 +1,11 @@
-version: '3.8'
-
 name: clean-architecture-dev-environment
-
 services:
   mongodb:
     container_name: mongodb-service-container
     image: mongo:7
     restart: unless-stopped
+    command:
+      ['--replSet', 'rs0', '--bind_ip_all', '--keyFile', '/etc/mongo-keyfile']
     ports:
       - '${MONGODB_PORT:-27017}:27017'
     environment:
@@ -14,8 +13,39 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD:-root}
     volumes:
       - mongodb_data:/data/db
+      - ./mongo-keyfile/mongo-keyfile:/etc/mongo-keyfile:ro
     networks:
       - backend
+    healthcheck:
+      test: |
+        mongosh --port 27017 --quiet --eval "db.adminCommand('ping')"
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+
+  mongo-init:
+    image: mongo:7
+    container_name: mongo-init-container
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    restart: 'no'
+    networks:
+      - backend
+    entrypoint: >
+      mongosh --host mongodb:27017 -u ${MONGODB_USERNAME:-root} -p ${MONGODB_PASSWORD:-root} --authenticationDatabase admin --eval '
+        try {
+          rs.status();
+          print("Replica set already initialized");
+        } catch (err) {
+          rs.initiate({
+            _id: "rs0",
+            members: [{ _id: 0, host: "localhost:27017" }]
+          });
+          print("Replica set initiated");
+        }
+      '
 
   redis:
     container_name: redis-service-container
